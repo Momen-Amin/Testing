@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Retrieve the public IP address
-ip_address=$(curl -s https://api.ipify.org)
+# Retrieve the Public IP address
+public_ip_address=$(curl -s https://api.ipify.org)
 
-# Print the IP address
-echo "Public IP address: $ip_address"
+# Retrieve the Local IP address
+local_ip_address=$(hostname -I | awk '{print $1}'
+
+# Print the Public IP address
+echo "Public IP address: $public_ip_address"
+
+# Print the Local IP address
+echo "Local IP address: $local_ip_address"
 
 # Email configuration
 recipient="<momen.amin@hotmail.com>"
 
 # Send email with IP address
-echo "Public IP address: $ip_address" | mail "Public IP Address" "${recipient}"
+echo "Public IP address: $public_ip_address" | mail "Public IP Address" "${recipient}"
