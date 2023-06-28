@@ -4,7 +4,7 @@
 public_ip_address=$(curl -s https://api.ipify.org)
 
 # Retrieve the Local IP address
-local_ip_address=$(hostname -I | awk '{print $1}'
+local_ip_address=$(hostname -I | awk '{print $1}')
 
 # Print the Public IP address
 echo "Public IP address: $public_ip_address"
