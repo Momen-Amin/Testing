@@ -19,12 +19,12 @@ recipient="<momen.amin@hotmail.com>"
 
 TO="momen.amin@hotmail.com"
 SUBJECT="Public & Local IP addresses"
-BODY1="$public_ip_address"
-BODY2="$local_ip_address"
+BODY1=Public IP address: "$public_ip_address"
+BODY2=Local IP address: "$local_ip_address"
 
 echo " "
 # Send email with IP address
 echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 echo " "
-echo "Subject:\n${BODY1}" "${BODY2}" | mail -s "${SUBJECT}" "${TO}"
+echo "Subject:${BODY1}"\n"${BODY2}" | mail -s "${SUBJECT}" "${TO}"
 echo " "
