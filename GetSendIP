@@ -16,4 +16,4 @@ echo "Local IP address: $local_ip_address"
 recipient="<momen.amin@hotmail.com>"
 
 # Send email with IP address
-echo "Public IP address: $public_ip_address" | mail "Public IP Address" "${recipient}"
+echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
