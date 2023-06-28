@@ -21,3 +21,5 @@ echo " "
 # Send email with IP address
 echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 echo " "
+echo "Public IP address: $public_ip_address" | MAILTO=momen.amin@hotmail.com
+echo " "
