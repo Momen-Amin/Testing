@@ -26,7 +26,5 @@ echo " "
 # Send email with IP address
 echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 echo " "
-echo "$SUBJECT: $public_ip_address"\n"$local_ip_address" | mail -s "Public IP Address" "${recipient}"
-echo " "
 echo "${BODY1}"\n"${BODY2}" | mail -s "${SUBJECT}" "${TO}"
 echo " "
