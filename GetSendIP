@@ -17,9 +17,16 @@ echo "Local IP address: $local_ip_address"
 # Email configuration
 recipient="<momen.amin@hotmail.com>"
 
+TO="momen.amin@hotmail.com"
+SUBJECT="Public & Local IP addresses"
+BODY="This is a test email sent using a Bash script."
+
+
 echo " "
 # Send email with IP address
 echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 echo " "
 echo "Public IP address: $public_ip_address" | MAILTO=momen.amin@hotmail.com
+echo " "
+echo -e "Subject:${SUBJECT}\n${BODY}" | mail -s "${SUBJECT}" "${TO}"
 echo " "
