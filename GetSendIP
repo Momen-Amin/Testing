@@ -19,12 +19,12 @@ recipient="<momen.amin@hotmail.com>"
 
 TO="momen.amin@hotmail.com"
 SUBJECT="The Public SSH Key has been added to a Server!"
-BODY1=Public IP address: "$public_ip_address"
-BODY2=Local IP address: "$local_ip_address"
+BODY1="Public IP address: "$public_ip_address""
+BODY2="Local IP address: "$local_ip_address""
 
 echo " "
 # Send email with IP address
 echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 echo " "
-echo "${BODY1}"\n"${BODY2}" | mail -s "${SUBJECT}" "${TO}"
+echo "${BODY1}" \n "${BODY2}" | mail -s "${SUBJECT}" "${TO}"
 echo " "
