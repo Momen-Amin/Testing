@@ -11,8 +11,9 @@ DATE=$(date +"%Y-%m-%d %H:%M:%S")
 # Retrieve the Public IP address
 public_ip_address=$(curl -s https://api.ipify.org)
 
-# Retrieve ALL Local (Private) IP addresses (one per line)
-local_ip_addresses=$(hostname -I | tr ' ' '\n')
+# Retrieve ALL private IPs with their interface names
+# Format: "eth0: 192.168.1.10"
+private_ips=$(ip -o -4 addr show | awk '{print $2": "$4}' | sed 's/\/.*//')
 
 # Prepare terminal output
 echo
@@ -24,8 +25,8 @@ echo "Date: $DATE"
 echo
 echo "Public IP: $public_ip_address"
 echo
-echo "Private IPs:"
-echo "$local_ip_addresses"
+echo "Private IPs (with interfaces):"
+echo "$private_ips"
 echo "=============================="
 echo
 
@@ -40,8 +41,8 @@ Date: ${DATE}
 Public IP Address:
 ${public_ip_address}
 
-Private IP Addresses:
-${local_ip_addresses}
+Private IP Addresses (with interface names):
+${private_ips}
 "
 
 # Send the email
