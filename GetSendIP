@@ -18,7 +18,7 @@ echo " "
 # Email configuration
 recipient="<momen.amin@hotmail.com>"
 TO="momen.amin@hotmail.com"
-SUBJECT="Mowjat's Public SSH Key has been added to a Server!"
+SUBJECT="Server IPs resolver!"
 BODY1="Public IP address: ${public_ip_address}"
 BODY2="Local IP address: ${local_ip_address}"
 
