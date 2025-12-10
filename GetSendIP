@@ -4,18 +4,22 @@
 #   Server IP Reporter Script
 # ==============================
 
-# Server info
 HOSTNAME=$(hostname)
 DATE=$(date +"%Y-%m-%d %H:%M:%S")
 
-# Retrieve the Public IP address
+# Public IP
 public_ip_address=$(curl -s https://api.ipify.org)
 
-# Retrieve ALL private IPs with their interface names
-# Format: "eth0: 192.168.1.10"
-private_ips=$(ip -o -4 addr show | awk '{print $2": "$4}' | sed 's/\/.*//')
+# Collect all interface names + IPv4 addresses
+private_ips=""
+for iface in $(ls /sys/class/net/); do
+    ip_addr=$(ip -4 addr show "$iface" | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    if [[ -n "$ip_addr" ]]; then
+        private_ips+="$iface: $ip_addr"$'\n'
+    fi
+done
 
-# Prepare terminal output
+# Terminal output
 echo
 echo "=============================="
 echo " Server IP Information"
@@ -30,7 +34,7 @@ echo "$private_ips"
 echo "=============================="
 echo
 
-# Email configuration
+# Email settings
 recipient="momen.amin@hotmail.com"
 subject="[$HOSTNAME] Server IP Report"
 
@@ -45,5 +49,4 @@ Private IP Addresses (with interface names):
 ${private_ips}
 "
 
-# Send the email
 echo -e "$email_body" | mail -s "$subject" "$recipient"
