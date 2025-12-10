@@ -4,15 +4,21 @@
 public_ip_address=$(curl -s https://api.ipify.org)
 
 # Retrieve the Local IP address
-local_ip_address=$(hostname -I | awk '{print $1}')
+1st_local_ip_address=$(hostname -I | awk '{print $1}')
+2nd_local_ip_address=$(hostname -I | awk '{print $2}')
 
 echo " "
 # Print the Public IP address
 echo "Public IP address: $public_ip_address"
 
 echo " "
-# Print the Local IP address
-echo "Local IP address: $local_ip_address"
+# Print the 1st Local IP address
+echo "Local IP address: $1st_local_ip_address"
+echo " "
+
+echo " "
+# Print the 2nd Local IP address
+echo "Local IP address: $2ns_local_ip_address"
 echo " "
 
 # Email configuration
@@ -20,9 +26,10 @@ recipient="<momen.amin@hotmail.com>"
 TO="momen.amin@hotmail.com"
 SUBJECT="Server IPs resolver!"
 BODY1="Public IP address: ${public_ip_address}"
-BODY2="Local IP address: ${local_ip_address}"
+BODY2="1st Local IP address: ${1st_local_ip_address}"
+BODY2="2nd Local IP address: ${2nd_local_ip_address}"
 
 # Send an email with IP addresses
-echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
+###echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
 
-echo -e "${BODY1}\n${BODY2}" | mail -s "${SUBJECT}" "${TO}"
+###echo -e "${BODY1}\n${BODY2}" | mail -s "${SUBJECT}" "${TO}"
