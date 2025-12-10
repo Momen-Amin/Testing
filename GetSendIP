@@ -1,35 +1,48 @@
 #!/bin/bash
 
+# ==============================
+#   Server IP Reporter Script
+# ==============================
+
+# Server info
+HOSTNAME=$(hostname)
+DATE=$(date +"%Y-%m-%d %H:%M:%S")
+
 # Retrieve the Public IP address
 public_ip_address=$(curl -s https://api.ipify.org)
 
-# Retrieve the Local IP address
-1st_local_ip_address=$(hostname -I | awk '{print $1}')
-2nd_local_ip_address=$(hostname -I | awk '{print $2}')
+# Retrieve ALL Local (Private) IP addresses (one per line)
+local_ip_addresses=$(hostname -I | tr ' ' '\n')
 
-echo " "
-# Print the Public IP address
-echo "Public IP address: $public_ip_address"
-
-echo " "
-# Print the 1st Local IP address
-echo "Local IP address: $1st_local_ip_address"
-echo " "
-
-echo " "
-# Print the 2nd Local IP address
-echo "Local IP address: $2ns_local_ip_address"
-echo " "
+# Prepare terminal output
+echo
+echo "=============================="
+echo " Server IP Information"
+echo "=============================="
+echo "Hostname: $HOSTNAME"
+echo "Date: $DATE"
+echo
+echo "Public IP: $public_ip_address"
+echo
+echo "Private IPs:"
+echo "$local_ip_addresses"
+echo "=============================="
+echo
 
 # Email configuration
-recipient="<momen.amin@hotmail.com>"
-TO="momen.amin@hotmail.com"
-SUBJECT="Server IPs resolver!"
-BODY1="Public IP address: ${public_ip_address}"
-BODY2="1st Local IP address: ${1st_local_ip_address}"
-BODY2="2nd Local IP address: ${2nd_local_ip_address}"
+recipient="momen.amin@hotmail.com"
+subject="[$HOSTNAME] Server IP Report"
 
-# Send an email with IP addresses
-###echo "Public IP address: $public_ip_address" | mail -s "Public IP Address" "${recipient}"
+# Email body
+email_body="Server Hostname: ${HOSTNAME}
+Date: ${DATE}
 
-###echo -e "${BODY1}\n${BODY2}" | mail -s "${SUBJECT}" "${TO}"
+Public IP Address:
+${public_ip_address}
+
+Private IP Addresses:
+${local_ip_addresses}
+"
+
+# Send the email
+echo -e "$email_body" | mail -s "$subject" "$recipient"
