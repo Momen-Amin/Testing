@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Set the debconf selections for Postfix configuration
-echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections
-echo "postfix postfix/mailname string YourDomain.com" | debconf-set-selections
+echo "postfix postfix/main_mailer_type select Internet Site" | sudo debconf-set-selections
+echo "postfix postfix/mailname string YourDomain.com" | sudo debconf-set-selections
 
 # Install Mailutils and Postfix
-apt-get update
-apt-get install -y mailutils
+sudo apt-get update
+sudo apt-get install -y mailutils
 
 # Additional configuration steps if required
 # ...
 
 # Restart Postfix
-systemctl restart postfix
+sudo systemctl restart postfix
